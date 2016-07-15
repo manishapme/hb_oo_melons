@@ -14,6 +14,7 @@ class AbstractMelonOrder(object):
         self.shipped = False
         self.order_type = order_type
         self.tax = tax
+        self.order_time = datetime.datetime.now()
 
     def get_total(self):
         """Calculate price."""
@@ -35,8 +36,8 @@ class AbstractMelonOrder(object):
 
         splurge_price = randint(4, 9)
 
-        is_weekday = datetime.datetime.now().weekday() in range(5)
-        is_rushhour = datetime.datetime.now().hour in range(8,11)
+        is_weekday = self.order_time.weekday() in range(5)
+        is_rushhour = self.order_time.hour in range(8,11)
 
         if is_weekday and is_rushhour: 
             splurge_price += 4
