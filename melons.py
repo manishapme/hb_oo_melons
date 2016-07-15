@@ -1,4 +1,5 @@
 from random import randint
+import datetime
 
 """This file should have our order classes in it."""
 
@@ -32,7 +33,16 @@ class AbstractMelonOrder(object):
     def get_base_price(self):
         """Use random module for splurge pricing"""
 
-        return randint(4, 9)        
+        splurge_price = randint(4, 9)
+
+        is_weekday = datetime.datetime.now().weekday() in range(5)
+        is_rushhour = datetime.datetime.now().hour in range(8,11)
+
+        if is_weekday and is_rushhour: 
+            splurge_price += 4
+
+
+        return splurge_price
 
 
 class DomesticMelonOrder(AbstractMelonOrder):
